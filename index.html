@@ -37,7 +37,7 @@
     <!--content container strat-->
     <div class="content container-fluid">
       <div class="container">
-        <!--sidebar staets-->
+        <!--sidebar starts-->
         <div class="sidebar">
           <ul class="sidebar-options">
             <li class="option"><span class="fa-solid fa-caret-right"></span>Lables</li>
@@ -60,12 +60,13 @@
                   data-target-popup="#add-notes-pop-up" data-toggle-popup="active">
                   <span class="fa-solid fa-times"></span>
                 </button>
+                <!--getting input from user-->
                 <div class="content">
                   <form id="task-form">
-                    <input class="title" name="title" placeholder="Task Title" type="text">
+                    <input class="title form-control" name="title" placeholder="Task Title" type="text">
 
-                    <textarea class="description" name="description" placeholder="Task Description...." id=""
-                      rows="5"></textarea>
+                    <textarea class="description form-control" name="description" placeholder="Task Description...."
+                      id="" rows="15"></textarea>
 
                     <button style="visibility: hidden;" id="formSubmitButton" type="submit">Submit</button>
                   </form>
@@ -73,7 +74,7 @@
               </div>
             </div>
           </div>
-          <div class="tasks-container">
+          <div class="tasks-container mt-5 d-flex flex-column gap-2">
             <!--tasks will appear here......-->
           </div>
         </div>

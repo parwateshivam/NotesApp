@@ -12,6 +12,7 @@ let taskArray = [];
 
 document.querySelector(".add-notes-form").addEventListener("mouseleave", () => {
   document.getElementById("formSubmitButton").click();
+  closePopup.click();
 });
 
 taskForm.addEventListener("submit", (event) => {
@@ -20,18 +21,15 @@ taskForm.addEventListener("submit", (event) => {
     if (!event.target['title'].value || !event.target['description'].value) {
       throw ("empty fields !");
     }
-    // create new object each time
     let newTask = {
       title: event.target["title"].value,
       description: event.target["description"].value,
       timeStamp: `Time : ${new Date().toLocaleTimeString()} Date : ${new Date().toLocaleDateString()}`
     };
-    // clear inputs
     event.target["title"].value = "";
     event.target["description"].value = "";
-    // close form popup
     closePopup.click();
-    taskArray.push(newTask); // push new object
+    taskArray.push(newTask);
     displayTask();
   } catch (err) {
     console.log("please add task before submitting !", err);
@@ -47,14 +45,10 @@ function displayTask() {
     singleTask.innerHTML = `
       <h4 class="title">${task.title}</h4>
       <p class="description">${task.description}</p>
-      <span class="timeStamp">${task.timeStamp}</span>
-    `;
+      <span class="timeStamp">${task.timeStamp}</span>`;
     taskContainer.appendChild(singleTask);
   });
 }
-
-
-
 
 
 
