@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NotesApp</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="./Vendors/bootstrap-5.0.2-dist/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./Styles/style.css">
+  <!-- Bootstrap JS -->
+  <script src="./Vendors/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+  <!-- FontAewsome ICON -->
+  <link rel="stylesheet" href="./Vendors/fontawesome/css/all.css">
+</head>
+
+<body>
+  <div class="main-container">
+    <!--header container-->
+    <div class="container-fluid bg-dark">
+      <div class="container">
+        <div class="header text-light d-flex gap-5 align-items-center justify-content-between p-2">
+          <div class="logo">
+            <button class="btn btn-light">
+              <span class="fa-solid fa-bars"></span>
+            </button>
+            <span class="fw-bolder">Note Keeper</span>
+          </div>
+          <div class="search-bar">
+            <input class="form-control" type="search" name="" placeholder="enter title to search" id="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--header ends here-->
+    <!--content container strat-->
+    <div class="content container-fluid">
+      <div class="container">
+        <!--sidebar staets-->
+        <div class="sidebar">
+          <ul class="sidebar-options">
+            <li class="option"><span class="fa-solid fa-caret-right"></span>Lables</li>
+            <li class="option"><span class="fa-solid fa-caret-right"></span>Edit Notes</li>
+            <li class="option"><span class="fa-solid fa-caret-right"></span>Options</li>
+          </ul>
+        </div>
+        <!--sidebar end here-->
+
+        <!--Keeper body-->
+        <div class="keeper-body">
+          <div class="action">
+            <button onclick="hideShow(event)" id="add-notes-button" class="btn btn-primary"
+              data-target-popup="#add-notes-pop-up" data-toggle-popup="show">Add Notes</button>
+
+            <div id="add-notes-pop-up" class="add-notes-pop-up hide">
+              <div class="add-notes-form">
+                <button onclick="hideShow(event)"
+                  class="position-absolute start-100 top-0 translate-middle close btn btn-danger rounded-circle"
+                  data-target-popup="#add-notes-pop-up" data-toggle-popup="show">
+                  <span class="fa-solid fa-times"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Keeper body end-->
+      </div>
+    </div>
+    <script src="./Scripts/script.js"></script>
+</body>
+
+</html>
