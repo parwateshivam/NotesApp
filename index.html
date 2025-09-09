@@ -51,17 +51,30 @@
         <div class="keeper-body">
           <div class="action">
             <button onclick="hideShow(event)" id="add-notes-button" class="btn btn-primary"
-              data-target-popup="#add-notes-pop-up" data-toggle-popup="show">Add Notes</button>
+              data-target-popup="#add-notes-pop-up" data-toggle-popup="active">Add Notes</button>
 
             <div id="add-notes-pop-up" class="add-notes-pop-up hide">
               <div class="add-notes-form">
-                <button onclick="hideShow(event)"
+                <button id="close-popup" onclick="hideShow(event)"
                   class="position-absolute start-100 top-0 translate-middle close btn btn-danger rounded-circle"
-                  data-target-popup="#add-notes-pop-up" data-toggle-popup="show">
+                  data-target-popup="#add-notes-pop-up" data-toggle-popup="active">
                   <span class="fa-solid fa-times"></span>
                 </button>
+                <div class="content">
+                  <form id="task-form">
+                    <input class="title" name="title" placeholder="Task Title" type="text">
+
+                    <textarea class="description" name="description" placeholder="Task Description...." id=""
+                      rows="5"></textarea>
+
+                    <button style="visibility: hidden;" id="formSubmitButton" type="submit">Submit</button>
+                  </form>
+                </div>
               </div>
             </div>
+          </div>
+          <div class="tasks-container">
+            <!--tasks will appear here......-->
           </div>
         </div>
         <!--Keeper body end-->
