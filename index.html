@@ -50,7 +50,7 @@
         <!--Keeper body-->
         <div class="keeper-body">
           <div class="action">
-            <button onclick="hideShow(event)" id="add-notes-button" class="btn btn-primary"
+            <button id="open-popup" onclick="hideShow(event)" class="btn btn-primary"
               data-target-popup="#add-notes-pop-up" data-toggle-popup="active">Add Notes</button>
 
             <div id="add-notes-pop-up" class="add-notes-pop-up hide">
@@ -63,10 +63,10 @@
                 <!--getting input from user-->
                 <div class="content">
                   <form id="task-form">
-                    <input class="title form-control" name="title" placeholder="Task Title" type="text">
+                    <input id="title" class="title form-control" name="title" placeholder="Task Title" type="text">
 
                     <textarea class="description form-control" name="description" placeholder="Task Description...."
-                      id="" rows="15"></textarea>
+                      id="description" rows="15"></textarea>
 
                     <button style="visibility: hidden;" id="formSubmitButton" type="submit">Submit</button>
                   </form>
