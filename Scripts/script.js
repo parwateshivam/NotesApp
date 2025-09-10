@@ -5,7 +5,7 @@ function hideShow(event) {
   }
 }
 
-let taskForm = document.getElementById("task-form"); // fixed typo
+let taskForm = document.getElementById("task-form");
 let closePopup = document.getElementById("close-popup");
 
 let taskArray = [];
@@ -34,7 +34,7 @@ taskForm.addEventListener("submit", (event) => {
   } catch (err) {
     console.log("please add task before submitting !", err);
   }
-})
+});
 
 function displayTask() {
   let taskContainer = document.querySelector('.tasks-container');
