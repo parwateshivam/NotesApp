@@ -4,17 +4,21 @@ function hideShow(event) {
     target.classList.toggle(event.target.dataset.togglePopup);
   }
 }
+
 // HTML elements
 let taskForm = document.getElementById("task-form");
 let closePopup = document.getElementById("close-popup");
 let openPopup = document.getElementById("open-popup");
+
 // global declarations
 let taskArray = [];
 let editIndex = null;
+
 // after removing mouse from form-pop-up this will executes and submit the form
 document.querySelector(".add-notes-form").addEventListener("mouseleave", () => {
   document.getElementById("formSubmitButton").click();
 });
+
 // this will executes after submitting the form
 taskForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -46,29 +50,37 @@ taskForm.addEventListener("submit", (event) => {
     console.log("please add task before submitting !", err);
   }
 });
+
 // displaying the task one by one
 function displayTask() {
   let taskContainer = document.querySelector('.tasks-container');
   taskContainer.innerHTML = "";
   taskArray.forEach((task, index) => {
     let singleTask = document.createElement("div");
-    singleTask.classList.value = "task border p-4";
+    singleTask.classList.value = "border p-4 rounded shadow";
     singleTask.innerHTML = `
       <h4 class="title">${task.title}</h4>
       <p class="description">${task.description}</p>
       <span class="timeStamp">${task.timeStamp}</span>
-      <button onClick='editTask(${index})'>Edit</button>
-      <button onClick='deleteTask(${index})'>Delete</button>`;
+      <button class="btn btn-info" onClick='editTask(${index})'>Edit</button>
+      <button class="btn btn-danger" onClick='deleteTask(${index})'>Delete</button>`;
     taskContainer.appendChild(singleTask);
   });
 }
+
 // delete task
 function deleteTask(deleteIndex) {
-  taskArray = taskArray.filter((task, taskIndex) => {
-    return taskIndex != deleteIndex;
-  })
-  displayTask();
+  let permission = window.confirm(`do you really want to delete this task ?`);
+  if (permission) {
+    taskArray = taskArray.filter((task, taskIndex) => {
+      return taskIndex != deleteIndex;
+    })
+    displayTask();
+  } else {
+    alert("will keep it as it is.");
+  }
 }
+
 // edit task
 function editTask(editTaskIndex) {
   document.getElementById("title").value = (taskArray[editTaskIndex].title);
