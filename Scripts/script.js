@@ -1,3 +1,10 @@
+function changeMode(event){
+  let target = document.querySelector(event.target.dataset.targetMaincontainer);
+  if(target){
+    target.classList.toggle(event.target.dataset.toggleMode);
+  }
+}
+
 function hideShow(event) {
   let target = document.querySelector(event.target.dataset.targetPopup);
   if (target) {
@@ -76,8 +83,6 @@ function deleteTask(deleteIndex) {
       return taskIndex != deleteIndex;
     })
     displayTask();
-  } else {
-    alert("will keep it as it is.");
   }
 }
 

@@ -16,10 +16,10 @@
 </head>
 
 <body>
-  <div class="main-container">
+  <div id="main-container" class="main-container">
 
     <!--header container-->
-    <div class="container-fluid bg-dark">
+    <div class="container-fluid bg-dark p-2">
       <div class="container">
         <div class="header text-light d-flex gap-5 align-items-center justify-content-between p-2">
           <div class="logo">
@@ -28,8 +28,15 @@
             </button>
             <span class="fw-bolder">Note Keeper</span>
           </div>
-          <div class="search-bar">
-            <input class="form-control" type="search" name="" placeholder="enter title to search" id="">
+          <div class="right-part d-flex gap-5">
+            <div class="search-bar">
+              <input class="form-control" type="search" name="" placeholder="enter title to search" id="">
+            </div>
+            <div class="change-mode">
+              <button class="btn btn-light" onclick="changeMode(event)" data-target-maincontainer="#main-container"
+                data-toggle-mode="mode">Switch
+                Mode</button>
+            </div>
           </div>
         </div>
       </div>
