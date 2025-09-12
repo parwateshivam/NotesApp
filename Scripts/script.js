@@ -1,14 +1,7 @@
-function changeMode(event){
-  let target = document.querySelector(event.target.dataset.targetMaincontainer);
-  if(target){
-    target.classList.toggle(event.target.dataset.toggleMode);
-  }
-}
-
-function hideShow(event) {
-  let target = document.querySelector(event.target.dataset.targetPopup);
+function toggleClass(event) {
+  let target = document.querySelector(event.target.dataset.targetElement);
   if (target) {
-    target.classList.toggle(event.target.dataset.togglePopup);
+    target.classList.toggle(event.target.dataset.toggleClass);
   }
 }
 
@@ -16,9 +9,10 @@ function hideShow(event) {
 let taskForm = document.getElementById("task-form");
 let closePopup = document.getElementById("close-popup");
 let openPopup = document.getElementById("open-popup");
+let searchBar = document.getElementById("search-bar");
 
 // global declarations
-let taskArray = [];
+let taskArray = JSON.parse(localStorage.getItem("data")) || [];
 let editIndex = null;
 
 // after removing mouse from form-pop-up this will executes and submit the form
@@ -52,26 +46,36 @@ taskForm.addEventListener("submit", (event) => {
     event.target["title"].value = "";
     event.target["description"].value = "";
     closePopup.click();
-    displayTask();
+    displayTask(taskArray);
+    saveData(taskArray);
   } catch (err) {
     console.log("please add task before submitting !", err);
   }
 });
 
 // displaying the task one by one
-function displayTask() {
+function displayTask(arrayToBeDisplayed) {
+  if (arrayToBeDisplayed.length === 0) {
+    document.getElementById("task-msg").innerText = "No Data to Display !";
+  } else {
+    document.getElementById("task-msg").innerText = "All tasks";
+  }
   let taskContainer = document.querySelector('.tasks-container');
   taskContainer.innerHTML = "";
-  taskArray.forEach((task, index) => {
-    let singleTask = document.createElement("div");
-    singleTask.classList.value = "border p-4 rounded shadow";
-    singleTask.innerHTML = `
+  arrayToBeDisplayed.forEach((task, index) => {
+    let div = document.createElement("div");
+    div.classList.value = "border p-3 rounded border-dark";
+    div.innerHTML = `
       <h4 class="title">${task.title}</h4>
       <p class="description">${task.description}</p>
-      <span class="timeStamp">${task.timeStamp}</span>
-      <button class="btn btn-info" onClick='editTask(${index})'>Edit</button>
-      <button class="btn btn-danger" onClick='deleteTask(${index})'>Delete</button>`;
-    taskContainer.appendChild(singleTask);
+      <div class="d-flex justify-content-between">
+        <span class="timeStamp">${task.timeStamp}</span>
+        <div class="d-flex gap-3">
+          <button class="btn btn-info" onClick='editTask(${index})'>Edit</button>
+          <button class="btn btn-danger" onClick='deleteTask(${index})'>Delete</button>
+        </div>
+      </div>`;
+    taskContainer.appendChild(div);
   });
 }
 
@@ -82,7 +86,8 @@ function deleteTask(deleteIndex) {
     taskArray = taskArray.filter((task, taskIndex) => {
       return taskIndex != deleteIndex;
     })
-    displayTask();
+    saveData(taskArray);
+    displayTask(taskArray);
   }
 }
 
@@ -94,6 +99,23 @@ function editTask(editTaskIndex) {
   openPopup.click();
 }
 
+// return task based on search value
+searchBar.addEventListener("change", (event) => {
+  let searchValue = event.target.value;
+  event.target.value = "";
+  let filteredArray = taskArray.filter((task, index) => {
+    if (task.title.includes(searchValue) || task.description.includes(searchValue) || task.timeStamp.includes(searchValue)) {
+      return task;
+    }
+  });
+  displayTask(filteredArray);
+});
+
+function saveData(data) {
+  localStorage.setItem("data", JSON.stringify(data));
+}
+
+displayTask(taskArray);
 
 
 
