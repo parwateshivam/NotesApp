@@ -1,9 +1,6 @@
-function toggleClass(event) {
-  let target = document.querySelector(event.target.dataset.targetElement);
-  if (target) {
-    target.classList.toggle(event.target.dataset.toggleClass);
-  }
-}
+// global declarations
+let taskArray = JSON.parse(localStorage.getItem("data")) || [];
+let editIndex = null;
 
 // HTML elements
 let taskForm = document.getElementById("task-form");
@@ -11,9 +8,13 @@ let closePopup = document.getElementById("close-popup");
 let openPopup = document.getElementById("open-popup");
 let searchBar = document.getElementById("search-bar");
 
-// global declarations
-let taskArray = JSON.parse(localStorage.getItem("data")) || [];
-let editIndex = null;
+// class toggler function
+function toggleClass(event) {
+  let target = document.querySelector(event.target.dataset.targetElement);
+  if (target) {
+    target.classList.toggle(event.target.dataset.toggleClass);
+  }
+}
 
 // after removing mouse from form-pop-up this will executes and submit the form
 document.querySelector(".add-notes-form").addEventListener("mouseleave", () => {
@@ -64,16 +65,14 @@ function displayTask(arrayToBeDisplayed) {
   taskContainer.innerHTML = "";
   arrayToBeDisplayed.forEach((task, index) => {
     let div = document.createElement("div");
-    div.classList.value = "border p-3 rounded border-dark";
+    div.classList.value = "border p-3 d-flex flex-column gap-1";
     div.innerHTML = `
       <h4 class="title">${task.title}</h4>
       <p class="description">${task.description}</p>
-      <div class="d-flex justify-content-between">
-        <span class="timeStamp">${task.timeStamp}</span>
-        <div class="d-flex gap-3">
-          <button class="btn btn-info" onClick='editTask(${index})'>Edit</button>
-          <button class="btn btn-danger" onClick='deleteTask(${index})'>Delete</button>
-        </div>
+      <span class="timeStamp">${task.timeStamp}</span>
+      <div class="d-flex gap-3 p-2">
+      <button class="btn btn-info" onClick='editTask(${index})'>Edit</button>
+      <button class="btn btn-danger" onClick='deleteTask(${index})'>Delete</button>
       </div>`;
     taskContainer.appendChild(div);
   });
@@ -110,6 +109,7 @@ searchBar.addEventListener("change", (event) => {
   });
   displayTask(filteredArray);
 });
+
 
 function saveData(data) {
   localStorage.setItem("data", JSON.stringify(data));

@@ -43,6 +43,13 @@
   padding: 2rem;
 }
 
+.tasks-container{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-template-rows: auto;
+  gap: 1rem;
+}
+
 .action {
   display: flex;
   justify-content: center;
