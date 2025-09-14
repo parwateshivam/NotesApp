@@ -32,6 +32,7 @@ taskForm.addEventListener("submit", (event) => {
     if (editIndex !== null) {
       taskArray[editIndex].title = event.target["title"].value;
       taskArray[editIndex].description = event.target["description"].value;
+      taskArray[editIndex].category = event.target["category"].value;
       taskArray[editIndex].timeStamp = `Time : ${new Date().toLocaleTimeString()} Date : ${new Date().toLocaleDateString()}`
       editIndex = null;
     }
@@ -40,12 +41,14 @@ taskForm.addEventListener("submit", (event) => {
       let newTask = {
         title: event.target["title"].value,
         description: event.target["description"].value,
+        category: event.target["category"].value,
         timeStamp: `Time : ${new Date().toLocaleTimeString()} Date : ${new Date().toLocaleDateString()}`
       };
       taskArray.push(newTask);
     }
     event.target["title"].value = "";
     event.target["description"].value = "";
+    event.target["category"].value = "";
     closePopup.click();
     displayTask(taskArray);
     saveData(taskArray);
@@ -65,14 +68,18 @@ function displayTask(arrayToBeDisplayed) {
   taskContainer.innerHTML = "";
   arrayToBeDisplayed.forEach((task, index) => {
     let div = document.createElement("div");
-    div.classList.value = "border p-3 d-flex flex-column gap-1";
+    div.classList.value = "border p-3 d-flex flex-column";
     div.innerHTML = `
-      <h4 class="title">${task.title}</h4>
-      <p class="description">${task.description}</p>
+      <h4>${task.title}</h4>
+      <p>${task.description}</p>
+      <div class="d-flex gap-1">
+       <p>Category :</p>
+       <p>${task.category}</p>
+      </div>
       <span class="timeStamp">${task.timeStamp}</span>
       <div class="d-flex gap-3 p-2">
-      <button class="btn btn-info" onClick='editTask(${index})'>Edit</button>
-      <button class="btn btn-danger" onClick='deleteTask(${index})'>Delete</button>
+       <button class="btn btn-info" onClick='editTask(${index})'>Edit</button>
+       <button class="btn btn-danger" onClick='deleteTask(${index})'>Delete</button>
       </div>`;
     taskContainer.appendChild(div);
   });

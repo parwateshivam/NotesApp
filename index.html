@@ -79,7 +79,16 @@
                     <input id="title" class="title form-control" name="title" placeholder="Task Title" type="text">
 
                     <textarea class="description form-control" name="description" placeholder="Task Description...."
-                      id="description" rows="15"></textarea>
+                      id="description" rows="5"></textarea>
+
+                    <label for="note-category">Choose Category:</label>
+                    <select id="note-category" name="category" required>
+                      <option value="" disabled selected>-- Select a Category --</option>
+                      <option value="personal">Personal</option>
+                      <option value="work">Work / Office</option>
+                      <option value="study">Study / Learning</option>
+                      <option value="projects">Projects</option>
+                    </select>
 
                     <button style="visibility: hidden;" id="formSubmitButton" type="submit">Submit</button>
                   </form>
